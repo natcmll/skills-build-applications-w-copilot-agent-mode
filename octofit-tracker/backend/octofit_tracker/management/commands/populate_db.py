@@ -22,4 +22,22 @@ class Command(BaseCommand):
         # Create test workouts
         Workout.objects.create(name="Workout A", description="A sample workout")
 
+        # Additional test users
+        user3 = User.objects.create(email="user3@example.com", name="User Three", password="password3")
+        user4 = User.objects.create(email="user4@example.com", name="User Four", password="password4")
+
+        # Additional test teams
+        team2 = Team.objects.create(name="Team Beta", members=[user3.id, user4.id])
+
+        # Additional test activities
+        Activity.objects.create(user=user3, activity_type="Swimming", duration=60)
+        Activity.objects.create(user=user4, activity_type="Hiking", duration=120)
+
+        # Additional test leaderboard entries
+        Leaderboard.objects.create(team=team2, score=200)
+
+        # Additional test workouts
+        Workout.objects.create(name="Workout B", description="Another sample workout")
+        Workout.objects.create(name="Workout C", description="Yet another sample workout")
+
         self.stdout.write(self.style.SUCCESS('Successfully populated the database with test data'))
